@@ -1,9 +1,5 @@
 import React, { FunctionComponent } from 'react'
 
-interface SelectProps {
-  options: string[]
-}
-
 const Select: FunctionComponent<SelectProps> = ({ options }) => {
   return (
     <select>
