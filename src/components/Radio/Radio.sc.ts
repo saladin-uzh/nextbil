@@ -5,6 +5,8 @@ export const RadioWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  padding: 0 0 ${spacings.xSmall};
+  margin: 0 0 ${spacings.xxSmall};
 `
 
 export const Option = styled.div`
@@ -12,6 +14,10 @@ export const Option = styled.div`
   align-items: center;
   margin: 0 ${spacings.small} 0 calc(${spacings.xxSmall} / 2);
   cursor: pointer;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
 
   span {
     margin-left: calc(${spacings.xxSmall});

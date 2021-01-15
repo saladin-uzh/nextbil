@@ -15,7 +15,7 @@ export default {
     },
     options: {
       name: 'options',
-      defaultValue: ['Option 1', 'Option 2', 'Option 3'],
+      defaultValue: ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'],
       type: { name: 'array', required: true },
       control: { type: 'array', separator: '; ' },
     },

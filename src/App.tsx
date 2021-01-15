@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { createGlobalStyle } from 'styled-components'
-import { colors, typography } from './constants'
+import { colors, data, typography } from './constants'
 
 import { Form } from './components/Form.sc'
 import Input from './components/Input'
@@ -27,6 +27,15 @@ const AppStyles = createGlobalStyle`
       display: flex;
       justify-content: center;
       align-items: center;
+
+      a {
+        color: ${colors.blue1};
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 `
@@ -41,9 +50,15 @@ const App: FunctionComponent = () => {
           <Input label="Enter your name" />
           <Input type="email" label="Email" icon={<Envelope />} />
           <Input type="password" label="Password" icon={<Lock />} />
-          <Select label="Select country" options={['option 1', 'option 2', 'option 3']} />
-          <Radio options={['Male', 'Feemale']} />
-          <Checkbox label="Accept terms and conditions" />
+          <Select label="Select country" options={data.countries} />
+          <Radio options={data.genders} />
+          <Checkbox
+            label={
+              <>
+                Accept <a href="#terms">terms</a> and <a href="#conditions">conditions</a>
+              </>
+            }
+          />
           <Button label="Sign Up" />
         </Form>
       </main>

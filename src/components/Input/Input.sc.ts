@@ -13,6 +13,8 @@ export const InputWrapper = styled.label<InputWrapperProps>`
   color: ${colors.grey3};
   display: flex;
 
+  margin-bottom: ${spacings.small};
+
   input {
     background: ${colors.grey2};
     border-radius: ${radii.normal};
@@ -44,9 +46,11 @@ export const InputIcon = styled.div`
   position: absolute;
   left: ${spacings.xSmall};
   top: calc(${spacings.xSmall} - 0.125em);
-  font-size: ${spacings.small};
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  font-size: ${spacings.small};
   color: ${colors.grey3};
 `

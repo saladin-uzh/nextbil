@@ -9,6 +9,7 @@ export const CheckboxWrapper = styled.label`
   display: flex;
   cursor: pointer;
   align-items: center;
+  margin-bottom: ${spacings.xLarge};
 
   input {
     display: none;
@@ -26,7 +27,7 @@ export const CheckboxSC = styled.div<CheckboxSCProps>`
   height: calc(${spacings.medium} / 2);
   border: 1px solid ${colors.blue1};
   border-radius: ${radii.sharp};
-  margin-right: 5px;
+  margin-right: ${spacings.xxSmall};
   background: ${({ isChecked }) => (isChecked ? colors.blue1 : 'transparent')};
   box-shadow: inset 0 0 0 2px ${colors.white};
 

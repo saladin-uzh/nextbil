@@ -9,6 +9,7 @@ interface ArrowSvgProps {
 
 const ArrowSvg: FunctionComponent<ArrowSvgProps> = ({ direction }) => {
   const arrowStyles = {
+    top: 0,
     transform: direction === 'up' ? 'rotate(180deg)' : 'none',
   } as CSSProperties
 

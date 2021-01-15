@@ -8,6 +8,7 @@ export interface ButtonSCProps {
 export const ButtonSC = styled.button<ButtonSCProps>`
   width: 100%;
   padding: ${spacings.small};
+  margin-bottom: ${spacings.medium};
 
   border-radius: ${radii.round};
   border: 0;

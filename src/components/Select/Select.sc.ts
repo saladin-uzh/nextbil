@@ -13,6 +13,7 @@ export const SelectWrapper = styled.div<SelectWrapperProps>`
 
   width: calc(100% - ${spacings.xSmall} * 2);
   padding: ${spacings.xSmall};
+  margin-bottom: ${spacings.large};
 
   background: ${colors.grey2};
   border-radius: ${radii.normal};
@@ -33,12 +34,20 @@ export const OptionsBox = styled.ul`
 
   list-style: none;
   width: 100%;
+  height: 185px;
   padding: calc(${spacings.xxSmall} / 2) 0;
   margin: 0;
+
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   background: ${colors.white};
   border-radius: ${radii.normal};
   box-shadow: 0px 3px 8px ${colors.grey5};
+
+  z-index: 100;
 `
 
 interface OptionProps {
