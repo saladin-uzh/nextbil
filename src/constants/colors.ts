@@ -6,5 +6,6 @@ export default {
   grey1: 'hsla(0, 0%, 13%, 1)',
   grey2: 'hsla(204, 33%, 97%, 1)',
   grey3: 'hsla(0, 0%, 64%, 1)',
+  grey5: 'hsla(0, 0%, 0%, 0.15);',
   red: 'hsla(0, 81%, 53%, 1)',
 }

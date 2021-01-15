@@ -1,13 +1,21 @@
 import React from 'react'
 import { Story } from '@storybook/react/types-6-0'
 
-import Radio from './Radio'
+import Radio, { RadioProps } from './Radio'
 
 export default {
   component: Radio,
   title: 'Radio',
+  argTypes: {
+    options: {
+      name: 'options',
+      defaultValue: ['Option 1', 'Option 2', 'Option 3'],
+      type: { name: 'array', required: true },
+      control: { type: 'array', separator: '; ' },
+    },
+  },
 }
 
-const Template: Story = args => <Radio {...args} />
+const Template: Story<RadioProps> = args => <Radio {...args} />
 
 export const Default = Template.bind({})

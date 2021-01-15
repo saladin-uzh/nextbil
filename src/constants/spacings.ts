@@ -1,5 +1,6 @@
 export default {
-  xSmall: '10px',
+  xxSmall: '10px',
+  xSmall: '17.5px',
   small: '20px',
   medium: '25px',
   large: '30px',

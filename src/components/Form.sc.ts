@@ -1,15 +1,14 @@
 import styled from 'styled-components'
-import { spacings } from '../constants'
+import { radii, spacings } from '../constants'
 
 export const Form = styled.form`
   width: 20%;
   min-width: 400px;
   height: 70vh;
-  /* min-height: 605px; */
   padding: ${spacings.large};
 
   background: white;
-  border-radius: 8px;
+  border-radius: ${radii.normal};
 
   display: flex;
   flex-direction: column;

@@ -1,3 +1,0 @@
-interface SelectProps {
-  options: string[]
-}

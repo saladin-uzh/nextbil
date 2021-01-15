@@ -1,8 +1,13 @@
 import React, { FunctionComponent } from 'react'
 import { ButtonSC } from './Button.sc'
 
-const Button: FunctionComponent<ButtonProps> = ({ label }) => {
-  return <ButtonSC>{label}</ButtonSC>
+export interface ButtonProps {
+  label: string
+  isDisabled?: boolean
 }
+
+const Button: FunctionComponent<ButtonProps> = ({ label, isDisabled = false }) => (
+  <ButtonSC isDisabled={isDisabled}>{label}</ButtonSC>
+)
 
 export default Button
