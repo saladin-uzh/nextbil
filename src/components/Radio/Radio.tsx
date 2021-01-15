@@ -1,11 +1,14 @@
 import React, { FunctionComponent, useState } from 'react'
+import { ErrorMessage } from '../ErrorMessage.sc'
 import { Option, RadioButton, RadioWrapper } from './Radio.sc'
 
 export interface RadioProps {
   options: string[]
+  hasError?: boolean
+  errorMessage?: string
 }
 
-const Radio: FunctionComponent<RadioProps> = ({ options }) => {
+const Radio: FunctionComponent<RadioProps> = ({ options, hasError, errorMessage }) => {
   const [selected, setSelected] = useState<number>()
 
   return (
@@ -22,6 +25,7 @@ const Radio: FunctionComponent<RadioProps> = ({ options }) => {
           </Option>
         )
       })}
+      {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </RadioWrapper>
   )
 }

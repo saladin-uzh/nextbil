@@ -21,6 +21,16 @@ export default {
       name: 'icon',
       control: { type: 'inline-radio', options: Object.keys(icons) },
     },
+    errorMessage: {
+      name: 'errorMessage',
+      control: { type: 'text' },
+      defaultValue: 'Input validation error message',
+    },
+    hasError: {
+      name: 'hasError',
+      defaultValue: false,
+      control: { type: 'boolean' },
+    },
   },
 }
 

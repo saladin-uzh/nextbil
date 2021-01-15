@@ -1,13 +1,16 @@
 import React, { FunctionComponent, useState } from 'react'
+import { ErrorMessage } from '../ErrorMessage.sc'
 import ArrowSvg from '../Icons/Arrow.svg'
 import { Option, OptionsBox, SelectWrapper } from './Select.sc'
 
 export interface SelectProps {
   label: string
   options: string[]
+  hasError?: boolean
+  errorMessage?: string
 }
 
-const Select: FunctionComponent<SelectProps> = ({ label, options }) => {
+const Select: FunctionComponent<SelectProps> = ({ label, options, hasError, errorMessage }) => {
   const [selected, setSelected] = useState<number>()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -36,6 +39,7 @@ const Select: FunctionComponent<SelectProps> = ({ label, options }) => {
           })}
         </OptionsBox>
       )}
+      {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </SelectWrapper>
   )
 }

@@ -47,19 +47,32 @@ const App: FunctionComponent = () => {
       <main>
         <Form>
           <h1>Create a new account</h1>
-          <Input label="Enter your name" />
-          <Input type="email" label="Email" icon={<Envelope />} />
-          <Input type="password" label="Password" icon={<Lock />} />
-          <Select label="Select country" options={data.countries} />
-          <Radio options={data.genders} />
+          <Input label="Enter your name" errorMessage="Please enter a valid name" hasError />
+          <Input type="email" label="Email" icon={<Envelope />} errorMessage="Please enter a valid email" hasError />
+          <Input
+            type="password"
+            label="Password"
+            icon={<Lock />}
+            errorMessage="Please enter a valid password"
+            hasError
+          />
+          <Select
+            label="Select country"
+            options={data.countries}
+            errorMessage="You must select your country"
+            hasError
+          />
+          <Radio options={data.genders} errorMessage="You must select the gender" hasError />
           <Checkbox
             label={
               <>
                 Accept <a href="#terms">terms</a> and <a href="#conditions">conditions</a>
               </>
             }
+            errorMessage={'You must accept policies'}
+            hasError
           />
-          <Button label="Sign Up" />
+          <Button label="Sign Up" isDisabled />
         </Form>
       </main>
     </>

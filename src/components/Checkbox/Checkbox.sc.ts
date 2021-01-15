@@ -6,6 +6,7 @@ interface CheckboxSCProps {
 }
 
 export const CheckboxWrapper = styled.label`
+  position: relative;
   display: flex;
   cursor: pointer;
   align-items: center;

@@ -13,6 +13,16 @@ export default {
       type: { name: 'array', required: true },
       control: { type: 'array', separator: '; ' },
     },
+    errorMessage: {
+      name: 'errorMessage',
+      control: { type: 'text' },
+      defaultValue: 'Radio validation error message',
+    },
+    hasError: {
+      name: 'hasError',
+      defaultValue: false,
+      control: { type: 'boolean' },
+    },
   },
 }
 

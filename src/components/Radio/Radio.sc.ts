@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import { colors, radii, spacings, typography } from '../../constants'
 
 export const RadioWrapper = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0 0 ${spacings.xSmall};
-  margin: 0 0 ${spacings.xxSmall};
+  margin: 0 0 calc(${spacings.xxSmall} + ${spacings.xSmall});
 `
 
 export const Option = styled.div`
