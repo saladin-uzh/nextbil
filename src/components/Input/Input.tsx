@@ -1,22 +1,32 @@
-import React, { ChangeEvent, FunctionComponent, ReactText, useState } from 'react'
+import React, { ChangeEvent, FunctionComponent, ReactText } from 'react'
 import { ErrorMessage } from '../ErrorMessage.sc'
 import { InputIcon, InputWrapper } from './Input.sc'
+
+type InputType = 'text' | 'email' | 'password'
+type InputChangeEvent = (e: ChangeEvent<HTMLInputElement>) => void
+type InputIconType = JSX.Element | ReactText
+
 export interface InputProps {
+  name: string
+  type?: InputType
   label: string
-  type?: 'text' | 'email' | 'password'
-  icon?: JSX.Element | ReactText
+  value: string
+  onInputChange: InputChangeEvent
+  icon?: InputIconType
   hasError?: boolean
   errorMessage?: string
-  inputProps?: React.IframeHTMLAttributes<HTMLInputElement>
 }
 
-const Input: FunctionComponent<InputProps> = ({ label, icon, hasError, errorMessage, inputProps, type = 'text' }) => {
-  const [value, setValue] = useState('')
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value ?? '')
-  }
-
+const Input: FunctionComponent<InputProps> = ({
+  name,
+  label,
+  value,
+  onInputChange,
+  icon,
+  hasError,
+  errorMessage,
+  type = 'text',
+}) => {
   const hasLabel = !Boolean(value)
   const hasIcon = Boolean(icon)
 
@@ -24,7 +34,7 @@ const Input: FunctionComponent<InputProps> = ({ label, icon, hasError, errorMess
     <InputWrapper hasIcon={hasIcon}>
       {hasLabel && <span>{label}</span>}
       {hasIcon && <InputIcon>{icon}</InputIcon>}
-      <input type={type} value={value} onChange={handleChange} {...inputProps} />
+      <input name={name} type={type} value={value} onChange={onInputChange} />
       {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </InputWrapper>
   )

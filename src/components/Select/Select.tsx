@@ -1,16 +1,27 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { ChangeEvent, FunctionComponent, useState } from 'react'
 import { ErrorMessage } from '../ErrorMessage.sc'
 import ArrowSvg from '../Icons/Arrow.svg'
 import { Option, OptionsBox, SelectWrapper } from './Select.sc'
 
 export interface SelectProps {
+  name: string
   label: string
+  value?: number
+  onInputChange: (value: string | ChangeEvent<HTMLSelectElement>) => void
   options: string[]
   hasError?: boolean
   errorMessage?: string
 }
 
-const Select: FunctionComponent<SelectProps> = ({ label, options, hasError, errorMessage }) => {
+const Select: FunctionComponent<SelectProps> = ({
+  // name,
+  label,
+  // value,
+  // onInputChange,
+  options,
+  hasError,
+  errorMessage,
+}) => {
   const [selected, setSelected] = useState<number>()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -40,6 +51,7 @@ const Select: FunctionComponent<SelectProps> = ({ label, options, hasError, erro
         </OptionsBox>
       )}
       {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {/* <select name={name} value={selectedItem} onChange={onInputChange} /> */}
     </SelectWrapper>
   )
 }

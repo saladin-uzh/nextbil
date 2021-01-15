@@ -25,6 +25,10 @@ export const SelectWrapper = styled.div<SelectWrapperProps>`
     font-size: ${typography[1].fontSize};
     line-height: ${typography[1].lineHeight};
   }
+
+  select {
+    display: none;
+  }
 `
 
 export const OptionsBox = styled.ul`

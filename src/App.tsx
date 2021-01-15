@@ -10,6 +10,7 @@ import Checkbox from './components/Checkbox'
 import Button from './components/Button'
 import Envelope from './components/Icons/Envelope.svg'
 import Lock from './components/Icons/Lock.svg'
+import { Formik, useFormik } from 'formik'
 
 const AppStyles = createGlobalStyle`
   body {
@@ -41,23 +42,59 @@ const AppStyles = createGlobalStyle`
 `
 
 const App: FunctionComponent = () => {
+  const { values, handleChange, handleSubmit } = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+      country: undefined,
+      gender: null,
+      arePoliciesAccepted: false,
+    },
+    onSubmit: values => console.log(values),
+    validateOnBlur: true,
+    validationSchema: null, // TODO: Check out yup package
+  })
+
   return (
     <>
       <AppStyles />
       <main>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <h1>Create a new account</h1>
-          <Input label="Enter your name" errorMessage="Please enter a valid name" hasError />
-          <Input type="email" label="Email" icon={<Envelope />} errorMessage="Please enter a valid email" hasError />
           <Input
+            name="name"
+            label="Enter your name"
+            value={values.name}
+            onInputChange={handleChange}
+            hasError
+            errorMessage="Please enter a valid name"
+          />
+          <Input
+            name="email"
+            type="email"
+            label="Email"
+            value={values.email}
+            onInputChange={handleChange}
+            icon={<Envelope />}
+            errorMessage="Please enter a valid email"
+            hasError
+          />
+          <Input
+            name="password"
             type="password"
             label="Password"
+            value={values.password}
+            onInputChange={handleChange}
             icon={<Lock />}
             errorMessage="Please enter a valid password"
             hasError
           />
           <Select
+            name="country"
             label="Select country"
+            value={values.country}
+            onInputChange={handleChange}
             options={data.countries}
             errorMessage="You must select your country"
             hasError
