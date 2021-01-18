@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useState } from 'react'
 import { Formik, FormikValues } from 'formik'
 import * as Yup from 'yup'
 import { useMutation } from '@apollo/client'
@@ -17,8 +17,8 @@ import AppStyles from './AppStyles.sc'
 import { SIGNUP } from './gql/mutations'
 
 /**
- * TODO: Check storybook and add "With error" stories for all components
  * TODO: Write tests
+ * TODO: Fix CheckBox UI when checked
  */
 
 const initialValues = {
@@ -42,9 +42,11 @@ const validationSchema = Yup.object({
 })
 
 const App: FunctionComponent = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const [signup] = useMutation(SIGNUP)
 
   const handleSubmit = ({ name, email, password, country, gender }: FormikValues) => {
+    setIsLoading(true)
     signup({
       variables: { userData: { name, email, password, country, gender } },
     }).then(
@@ -53,9 +55,11 @@ const App: FunctionComponent = () => {
           signup: { id },
         },
       }) => {
+        setIsLoading(false)
         alert(`Signup successful!\r\nUser ID: ${id}`)
       },
       error => {
+        setIsLoading(false)
         alert(error.message)
       }
     )
@@ -115,7 +119,7 @@ const App: FunctionComponent = () => {
                 onInputBlur={handleBlur}
                 error={touched.arePoliciesAccepted && errors.arePoliciesAccepted}
               />
-              <Button label="Sign Up" isDisabled={!dirty || !isValid} />
+              <Button label="Sign Up" isDisabled={!dirty || !isValid} isLoading={isLoading} />
             </Form>
           )}
         </Formik>
