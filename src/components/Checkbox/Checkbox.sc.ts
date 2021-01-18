@@ -24,8 +24,8 @@ export const CheckboxWrapper = styled.label`
 `
 
 export const CheckboxSC = styled.div<CheckboxSCProps>`
-  width: calc(${spacings.medium} / 2);
-  height: calc(${spacings.medium} / 2);
+  width: calc(${spacings.large} / 2);
+  height: calc(${spacings.large} / 2);
   border: 1px solid ${colors.blue1};
   border-radius: ${radii.sharp};
   margin-right: ${spacings.xxSmall};

@@ -2,6 +2,7 @@ import React from 'react'
 import { Story } from '@storybook/react/types-6-0'
 
 import Radio, { RadioProps } from './Radio'
+import { Formik } from 'formik'
 
 export default {
   component: Radio,
@@ -13,19 +14,26 @@ export default {
       type: { name: 'array', required: true },
       control: { type: 'array', separator: '; ' },
     },
-    errorMessage: {
-      name: 'errorMessage',
-      control: { type: 'text' },
-      defaultValue: 'Radio validation error message',
-    },
-    hasError: {
-      name: 'hasError',
-      defaultValue: false,
-      control: { type: 'boolean' },
-    },
   },
 }
 
-const Template: Story<RadioProps> = args => <Radio {...args} />
+const Template: Story<RadioProps & { error?: string }> = args => (
+  <Formik
+    initialValues={{ radio: undefined }}
+    onSubmit={() => null}
+    initialErrors={{ radio: args.error }}
+    initialTouched={{ radio: true }}
+  >
+    <Radio name="radio" {...args} />
+  </Formik>
+)
 
 export const Default = Template.bind({})
+export const WithError = Template.bind({})
+WithError.argTypes = {
+  error: {
+    name: 'error',
+    control: { type: 'text' },
+    defaultValue: 'Radio validation error message',
+  },
+}

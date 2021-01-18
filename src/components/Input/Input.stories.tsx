@@ -21,16 +21,6 @@ export default {
       name: 'icon',
       control: { type: 'inline-radio', options: Object.keys(icons) },
     },
-    errorMessage: {
-      name: 'errorMessage',
-      control: { type: 'text' },
-      defaultValue: 'Input validation error message',
-    },
-    hasError: {
-      name: 'hasError',
-      defaultValue: false,
-      control: { type: 'boolean' },
-    },
   },
 }
 
@@ -40,3 +30,11 @@ const Template: Story<InputProps> = ({ icon, ...args }) => {
 }
 
 export const Default = Template.bind({})
+export const WithError = Template.bind({})
+WithError.argTypes = {
+  error: {
+    name: 'error',
+    control: { type: 'text' },
+    defaultValue: 'Input validation error message',
+  },
+}

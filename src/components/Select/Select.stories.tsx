@@ -2,6 +2,7 @@ import React from 'react'
 import { Story } from '@storybook/react/types-6-0'
 
 import Select, { SelectProps } from './Select'
+import { Formik } from 'formik'
 
 export default {
   component: Select,
@@ -19,19 +20,26 @@ export default {
       type: { name: 'array', required: true },
       control: { type: 'array', separator: '; ' },
     },
-    errorMessage: {
-      name: 'errorMessage',
-      control: { type: 'text' },
-      defaultValue: 'Select validation error message',
-    },
-    hasError: {
-      name: 'hasError',
-      defaultValue: false,
-      control: { type: 'boolean' },
-    },
   },
 }
 
-const Template: Story<SelectProps> = args => <Select {...args} />
+const Template: Story<SelectProps & { error?: string }> = args => (
+  <Formik
+    initialValues={{ select: undefined }}
+    onSubmit={() => null}
+    initialErrors={{ select: args.error }}
+    initialTouched={{ select: true }}
+  >
+    <Select name="select" {...args} />
+  </Formik>
+)
 
 export const Default = Template.bind({})
+export const WithError = Template.bind({})
+WithError.argTypes = {
+  error: {
+    name: 'error',
+    control: { type: 'text' },
+    defaultValue: 'Select validation error message',
+  },
+}
