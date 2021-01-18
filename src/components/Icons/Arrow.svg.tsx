@@ -1,4 +1,5 @@
 import React, { CSSProperties, FunctionComponent } from 'react'
+
 import IconRoot from './IconRoot'
 
 type ArrowDirection = 'up' | 'down'

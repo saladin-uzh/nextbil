@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Story } from '@storybook/react/types-6-0'
 
 import Envelope from '../Icons/Envelope.svg'
 import Lock from '../Icons/Lock.svg'
+
 import Input, { InputProps } from './Input'
 
 const icons = { envelope: <Envelope />, lock: <Lock /> }
@@ -13,7 +14,6 @@ export default {
   argTypes: {
     label: {
       name: 'label',
-      type: { name: 'string', required: true },
       defaultValue: 'Input placeholder',
       control: { type: 'text' },
     },
@@ -25,8 +25,12 @@ export default {
 }
 
 const Template: Story<InputProps> = ({ icon, ...args }) => {
+  const [value, setValue] = useState('')
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)
+
   const selectedIcon: JSX.Element = icons[icon as string]
-  return <Input icon={selectedIcon} {...args} />
+  return <Input icon={selectedIcon} {...args} onInputChange={handleChange} value={value} />
 }
 
 export const Default = Template.bind({})

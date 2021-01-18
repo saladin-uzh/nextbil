@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+
 import { colors, typography } from './constants'
 
 const AppStyles = createGlobalStyle`

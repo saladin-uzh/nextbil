@@ -1,5 +1,7 @@
 import React, { ChangeEvent, FocusEvent, FunctionComponent, ReactText } from 'react'
+
 import { ErrorMessage } from '../ErrorMessage.sc'
+
 import { InputIcon, InputWrapper } from './Input.sc'
 
 type InputType = 'text' | 'email' | 'password'
@@ -16,6 +18,7 @@ export interface InputProps {
   onInputBlur: InputBlurEvent
   icon?: InputIconType
   error?: string | false
+  dataTestId?: string
 }
 
 const Input: FunctionComponent<InputProps> = ({
@@ -27,6 +30,7 @@ const Input: FunctionComponent<InputProps> = ({
   icon,
   error,
   type = 'text',
+  dataTestId,
 }) => {
   const hasLabel = !Boolean(value)
   const hasIcon = Boolean(icon)
@@ -36,7 +40,14 @@ const Input: FunctionComponent<InputProps> = ({
     <InputWrapper hasIcon={hasIcon}>
       {hasLabel && <span>{label}</span>}
       {hasIcon && <InputIcon>{icon}</InputIcon>}
-      <input name={name} type={type} value={value} onChange={onInputChange} onBlur={onInputBlur} />
+      <input
+        name={name}
+        type={type}
+        value={value}
+        onChange={onInputChange}
+        onBlur={onInputBlur}
+        data-testid={dataTestId}
+      />
       {hasError && <ErrorMessage>{error}</ErrorMessage>}
     </InputWrapper>
   )

@@ -1,16 +1,20 @@
-import { useField } from 'formik'
 import React, { FunctionComponent, useEffect, useState } from 'react'
+import { useField } from 'formik'
+
 import { ErrorMessage } from '../ErrorMessage.sc'
+
 import ArrowSvg from '../Icons/Arrow.svg'
+
 import { Option, OptionsBox, SelectWrapper } from './Select.sc'
 
 export interface SelectProps {
   name: string
   label: string
   options: string[]
+  dataTestId?: string
 }
 
-const Select: FunctionComponent<SelectProps> = ({ name, label, options }) => {
+const Select: FunctionComponent<SelectProps> = ({ name, label, options, dataTestId }) => {
   const [selected, setSelected] = useState<number>()
   const [isOpen, setIsOpen] = useState(false)
   const [, meta, helpers] = useField(name)
@@ -33,7 +37,7 @@ const Select: FunctionComponent<SelectProps> = ({ name, label, options }) => {
   const hasError = Boolean(touched && error)
 
   return (
-    <SelectWrapper onClick={handleClick} hasSelection={hasSelection}>
+    <SelectWrapper onClick={handleClick} hasSelection={hasSelection} data-testid={dataTestId}>
       <span>{selectedItem}</span>
       <ArrowSvg direction={arrowDirection} />
       {isOpen && (

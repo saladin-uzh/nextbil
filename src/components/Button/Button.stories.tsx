@@ -19,6 +19,11 @@ export default {
       defaultValue: true,
       control: { type: 'boolean' },
     },
+    isLoading: {
+      name: 'isLoading',
+      defaultValue: false,
+      control: { type: 'boolean' },
+    },
   },
 } as Meta
 

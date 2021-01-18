@@ -1,14 +1,17 @@
-import { useField } from 'formik'
 import React, { FunctionComponent, useEffect, useState } from 'react'
+import { useField } from 'formik'
+
 import { ErrorMessage } from '../ErrorMessage.sc'
+
 import { Option, RadioButton, RadioWrapper } from './Radio.sc'
 
 export interface RadioProps {
   name: string
   options: string[]
+  dataTestId?: string
 }
 
-const Radio: FunctionComponent<RadioProps> = ({ name, options }) => {
+const Radio: FunctionComponent<RadioProps> = ({ name, options, dataTestId }) => {
   const [selected, setSelected] = useState<number>()
   const [, meta, helpers] = useField(name)
 
@@ -24,7 +27,7 @@ const Radio: FunctionComponent<RadioProps> = ({ name, options }) => {
   const hasError = Boolean(touched && error)
 
   return (
-    <RadioWrapper onBlur={handleBlur}>
+    <RadioWrapper onBlur={handleBlur} data-testid={dataTestId}>
       {options.map((option, index) => {
         const key = `option-${index}`
         const isSelected = typeof selected === 'number' && options[selected as number] === option

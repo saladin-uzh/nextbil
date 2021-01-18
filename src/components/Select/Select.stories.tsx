@@ -1,8 +1,8 @@
 import React from 'react'
+import { Formik } from 'formik'
 import { Story } from '@storybook/react/types-6-0'
 
 import Select, { SelectProps } from './Select'
-import { Formik } from 'formik'
 
 export default {
   component: Select,

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { colors, radii, spacings, typography } from '../../constants'
 
 const iconPadding = `calc(${spacings.small} + ${spacings.small} + ${spacings.xxSmall})`

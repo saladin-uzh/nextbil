@@ -1,4 +1,5 @@
 import React, { FunctionComponent, memo } from 'react'
+
 import IconRoot from './IconRoot'
 
 const Envelope: FunctionComponent = () => (

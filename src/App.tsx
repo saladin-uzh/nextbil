@@ -3,6 +3,8 @@ import { Formik, FormikValues } from 'formik'
 import * as Yup from 'yup'
 import { useMutation } from '@apollo/client'
 
+import AppStyles from './AppStyles.sc'
+
 import { genders, countries } from './data'
 
 import { Form } from './components/Form.sc'
@@ -13,12 +15,8 @@ import Checkbox from './components/Checkbox'
 import Button from './components/Button'
 import Envelope from './components/Icons/Envelope.svg'
 import Lock from './components/Icons/Lock.svg'
-import AppStyles from './AppStyles.sc'
-import { SIGNUP } from './gql/mutations'
 
-/**
- * TODO: Write tests
- */
+import { SIGNUP } from './gql/mutations'
 
 const initialValues = {
   name: '',
@@ -84,6 +82,7 @@ const App: FunctionComponent = () => {
                 onInputChange={handleChange}
                 onInputBlur={handleBlur}
                 error={touched.name && errors.name}
+                dataTestId="input-name"
               />
               <Input
                 name="email"
@@ -94,6 +93,7 @@ const App: FunctionComponent = () => {
                 onInputBlur={handleBlur}
                 icon={<Envelope />}
                 error={touched.email && errors.email}
+                dataTestId="input-email"
               />
               <Input
                 name="password"
@@ -104,9 +104,10 @@ const App: FunctionComponent = () => {
                 onInputBlur={handleBlur}
                 icon={<Lock />}
                 error={touched.password && errors.password}
+                dataTestId="input-password"
               />
-              <Select name="country" label="Select country" options={countries} />
-              <Radio name="gender" options={genders} />
+              <Select name="country" label="Select country" options={countries} dataTestId="select-country" />
+              <Radio name="gender" options={genders} dataTestId="radio-gender" />
               <Checkbox
                 name="arePoliciesAccepted"
                 label={
@@ -117,8 +118,14 @@ const App: FunctionComponent = () => {
                 onInputChange={handleChange}
                 onInputBlur={handleBlur}
                 error={touched.arePoliciesAccepted && errors.arePoliciesAccepted}
+                dataTestId="checkbox-policies"
               />
-              <Button label="Sign Up" isDisabled={!dirty || !isValid} isLoading={isLoading} />
+              <Button
+                label="Sign Up"
+                isDisabled={!dirty || !isValid}
+                isLoading={isLoading}
+                dataTestId="button-signup"
+              />
             </Form>
           )}
         </Formik>

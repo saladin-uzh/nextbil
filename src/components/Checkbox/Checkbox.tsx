@@ -1,6 +1,8 @@
 import React, { ChangeEvent, createRef, FocusEvent, FunctionComponent, useState } from 'react'
+
 import { ErrorMessage } from '../ErrorMessage.sc'
 import CheckmarkSvg from '../Icons/Checkmark.svg'
+
 import { CheckboxSC, CheckboxWrapper } from './Checkbox.sc'
 
 export interface CheckboxProps {
@@ -9,9 +11,10 @@ export interface CheckboxProps {
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
   onInputBlur?: (e: FocusEvent<HTMLInputElement>) => void
   error?: string | false
+  dataTestId?: string
 }
 
-const Checkbox: FunctionComponent<CheckboxProps> = ({ name, label, onInputChange, onInputBlur, error }) => {
+const Checkbox: FunctionComponent<CheckboxProps> = ({ name, label, onInputChange, onInputBlur, error, dataTestId }) => {
   const [isChecked, setIsChecked] = useState(false)
 
   const checkboxRef = createRef<HTMLInputElement>()
@@ -26,7 +29,15 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({ name, label, onInputChange
     <CheckboxWrapper onClick={handleClick}>
       <CheckboxSC isChecked={isChecked}>{isChecked && <CheckmarkSvg />}</CheckboxSC>
       <span>{label}</span>
-      <input name={name} type="checkbox" ref={checkboxRef} onChange={onInputChange} onBlur={onInputBlur} />
+      <input
+        name={name}
+        type="checkbox"
+        ref={checkboxRef}
+        onChange={onInputChange}
+        onBlur={onInputBlur}
+        data-testid={dataTestId}
+        checked={isChecked}
+      />
       {hasError && <ErrorMessage>{error}</ErrorMessage>}
     </CheckboxWrapper>
   )
