@@ -33,7 +33,7 @@ const Radio: FunctionComponent<RadioProps> = ({ name, options }) => {
         return (
           <Option key={key} onClick={handleSelect}>
             <RadioButton isSelected={isSelected} />
-            <span>{option}</span>
+            <span>{option.toLowerCase().replace(option.charAt(0).toLowerCase(), option.charAt(0))}</span>
           </Option>
         )
       })}
