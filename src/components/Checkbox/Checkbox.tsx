@@ -1,5 +1,6 @@
 import React, { ChangeEvent, createRef, FocusEvent, FunctionComponent, useState } from 'react'
 import { ErrorMessage } from '../ErrorMessage.sc'
+import CheckmarkSvg from '../Icons/Checkmark.svg'
 import { CheckboxSC, CheckboxWrapper } from './Checkbox.sc'
 
 export interface CheckboxProps {
@@ -23,7 +24,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({ name, label, onInputChange
 
   return (
     <CheckboxWrapper onClick={handleClick}>
-      <CheckboxSC isChecked={isChecked} />
+      <CheckboxSC isChecked={isChecked}>{isChecked && <CheckmarkSvg />}</CheckboxSC>
       <span>{label}</span>
       <input name={name} type="checkbox" ref={checkboxRef} onChange={onInputChange} onBlur={onInputBlur} />
       {hasError && <ErrorMessage>{error}</ErrorMessage>}

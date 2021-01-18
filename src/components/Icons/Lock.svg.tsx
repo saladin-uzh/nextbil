@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, memo } from 'react'
 import IconRoot from './IconRoot'
 
 const Lock: FunctionComponent = () => (
@@ -8,4 +8,4 @@ const Lock: FunctionComponent = () => (
   </IconRoot>
 )
 
-export default Lock
+export default memo(Lock)

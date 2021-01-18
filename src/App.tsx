@@ -18,7 +18,6 @@ import { SIGNUP } from './gql/mutations'
 
 /**
  * TODO: Write tests
- * TODO: Fix CheckBox UI when checked
  */
 
 const initialValues = {

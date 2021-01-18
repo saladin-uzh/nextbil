@@ -29,7 +29,9 @@ export const CheckboxSC = styled.div<CheckboxSCProps>`
   border: 1px solid ${colors.blue1};
   border-radius: ${radii.sharp};
   margin-right: ${spacings.xxSmall};
-  background: ${({ isChecked }) => (isChecked ? colors.blue1 : 'transparent')};
+  /* background: ${({ isChecked }) => (isChecked ? colors.blue1 : 'transparent')}; */
+  color: ${colors.blue1};
+  background: transparent;
   box-shadow: inset 0 0 0 2px ${colors.white};
 
   font-size: ${typography[1].fontSize};

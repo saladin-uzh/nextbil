@@ -6,10 +6,17 @@ interface IconRootProps extends SVGAttributes<SVGSVGElement> {
   iconStyles?: CSSProperties
 }
 
-const IconRoot: FunctionComponent<IconRootProps> = ({ width = '1em', height = '1em', iconStyles, children }) => {
+const IconRoot: FunctionComponent<IconRootProps> = ({
+  width = '1em',
+  height = '1em',
+  viewBox,
+  iconStyles,
+  children,
+}) => {
   const iconProps = {
     width,
     height,
+    viewBox,
     fill: 'currentColor',
     xmlns: 'http://www.w3.org/2000/svg',
     style: {
