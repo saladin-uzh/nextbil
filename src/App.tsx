@@ -1,5 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import { createGlobalStyle } from 'styled-components'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+
 import { colors, data, typography } from './constants'
 
 import { Form } from './components/Form.sc'
@@ -10,7 +13,6 @@ import Checkbox from './components/Checkbox'
 import Button from './components/Button'
 import Envelope from './components/Icons/Envelope.svg'
 import Lock from './components/Icons/Lock.svg'
-import { Formik, useFormik } from 'formik'
 
 const AppStyles = createGlobalStyle`
   body {
@@ -41,79 +43,82 @@ const AppStyles = createGlobalStyle`
   }
 `
 
-const App: FunctionComponent = () => {
-  const { values, handleChange, handleSubmit } = useFormik({
-    initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      country: undefined,
-      gender: null,
-      arePoliciesAccepted: false,
-    },
-    onSubmit: values => console.log(values),
-    validateOnBlur: true,
-    validationSchema: null, // TODO: Check out yup package
-  })
-
-  return (
-    <>
-      <AppStyles />
-      <main>
-        <Form onSubmit={handleSubmit}>
-          <h1>Create a new account</h1>
-          <Input
-            name="name"
-            label="Enter your name"
-            value={values.name}
-            onInputChange={handleChange}
-            hasError
-            errorMessage="Please enter a valid name"
-          />
-          <Input
-            name="email"
-            type="email"
-            label="Email"
-            value={values.email}
-            onInputChange={handleChange}
-            icon={<Envelope />}
-            errorMessage="Please enter a valid email"
-            hasError
-          />
-          <Input
-            name="password"
-            type="password"
-            label="Password"
-            value={values.password}
-            onInputChange={handleChange}
-            icon={<Lock />}
-            errorMessage="Please enter a valid password"
-            hasError
-          />
-          <Select
-            name="country"
-            label="Select country"
-            value={values.country}
-            onInputChange={handleChange}
-            options={data.countries}
-            errorMessage="You must select your country"
-            hasError
-          />
-          <Radio options={data.genders} errorMessage="You must select the gender" hasError />
-          <Checkbox
-            label={
-              <>
-                Accept <a href="#terms">terms</a> and <a href="#conditions">conditions</a>
-              </>
-            }
-            errorMessage={'You must accept policies'}
-            hasError
-          />
-          <Button label="Sign Up" isDisabled />
-        </Form>
-      </main>
-    </>
-  )
-}
+const App: FunctionComponent = () => (
+  <>
+    <AppStyles />
+    <main>
+      <Formik
+        initialValues={{
+          name: '',
+          email: '',
+          password: '',
+          country: undefined,
+          gender: undefined,
+          arePoliciesAccepted: false,
+        }}
+        onSubmit={values => console.log(values)}
+        validationSchema={Yup.object({
+          name: Yup.string()
+            .matches(/[a-zA-Z]+/, 'Please enter a valid name')
+            .required('This field is required'),
+          email: Yup.string().email('Please enter a valid email').required('This field is required'),
+          password: Yup.string().min(6, 'Please enter a valid password').required('This field is required'),
+          country: Yup.string().required('You must select your country'),
+          gender: Yup.string().required('You must select the gender'),
+          arePoliciesAccepted: Yup.boolean().isTrue('You must accept policies').required('You must accept policies'),
+        })}
+        validateOnBlur
+      >
+        {({ values, touched, errors, handleChange, handleBlur, handleSubmit, isValid, dirty }) => (
+          <Form onSubmit={handleSubmit}>
+            <h1>Create a new account</h1>
+            <Input
+              name="name"
+              label="Enter your name"
+              value={values.name}
+              onInputChange={handleChange}
+              onInputBlur={handleBlur}
+              error={touched.name && errors.name}
+            />
+            <Input
+              name="email"
+              type="email"
+              label="Email"
+              value={values.email}
+              onInputChange={handleChange}
+              onInputBlur={handleBlur}
+              icon={<Envelope />}
+              error={touched.email && errors.email}
+            />
+            <Input
+              name="password"
+              type="password"
+              label="Password"
+              value={values.password}
+              onInputChange={handleChange}
+              onInputBlur={handleBlur}
+              icon={<Lock />}
+              error={touched.password && errors.password}
+            />
+            <Select name="country" label="Select country" options={data.countries} />
+            <Radio name="gender" options={data.genders} />
+            <Checkbox
+              name="arePoliciesAccepted"
+              label={
+                <>
+                  Accept <a href="#terms">terms</a> and <a href="#conditions">conditions</a>
+                </>
+              }
+              onInputChange={handleChange}
+              onInputBlur={handleBlur}
+              error={touched.arePoliciesAccepted && errors.arePoliciesAccepted}
+            />
+            <Button label="Sign Up" isDisabled={!dirty || !isValid} />
+          </Form>
+        )}
+      </Formik>
+    </main>
+  </>
+)
 
 export default App

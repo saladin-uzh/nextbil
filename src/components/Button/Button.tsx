@@ -7,7 +7,9 @@ export interface ButtonProps {
 }
 
 const Button: FunctionComponent<ButtonProps> = ({ label, isDisabled = false }) => (
-  <ButtonSC isDisabled={isDisabled}>{label}</ButtonSC>
+  <ButtonSC isDisabled={isDisabled} disabled={isDisabled}>
+    {label}
+  </ButtonSC>
 )
 
 export default Button

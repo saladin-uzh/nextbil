@@ -1,4 +1,5 @@
-import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import { useField } from 'formik'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { ErrorMessage } from '../ErrorMessage.sc'
 import ArrowSvg from '../Icons/Arrow.svg'
 import { Option, OptionsBox, SelectWrapper } from './Select.sc'
@@ -6,30 +7,30 @@ import { Option, OptionsBox, SelectWrapper } from './Select.sc'
 export interface SelectProps {
   name: string
   label: string
-  value?: number
-  onInputChange: (value: string | ChangeEvent<HTMLSelectElement>) => void
   options: string[]
-  hasError?: boolean
-  errorMessage?: string
 }
 
-const Select: FunctionComponent<SelectProps> = ({
-  // name,
-  label,
-  // value,
-  // onInputChange,
-  options,
-  hasError,
-  errorMessage,
-}) => {
+const Select: FunctionComponent<SelectProps> = ({ name, label, options }) => {
   const [selected, setSelected] = useState<number>()
   const [isOpen, setIsOpen] = useState(false)
+  const [, meta, helpers] = useField(name)
 
-  const handleClick = () => setIsOpen(isOpen => !isOpen)
+  const { value, touched, error } = meta
+  const { setValue, setTouched } = helpers
+
+  const handleClick = () => {
+    setIsOpen(isOpen => !isOpen)
+    if (!touched && isOpen) setTouched(true)
+  }
+
+  useEffect(() => {
+    if (typeof selected === 'number') setValue(options[selected])
+  }, [selected])
 
   const hasSelection = typeof selected === 'number'
-  const selectedItem = hasSelection ? options[selected as number] : label
+  const selectedItem = hasSelection ? value : label
   const arrowDirection = isOpen ? 'up' : 'down'
+  const hasError = Boolean(touched && error)
 
   return (
     <SelectWrapper onClick={handleClick} hasSelection={hasSelection}>
@@ -50,8 +51,7 @@ const Select: FunctionComponent<SelectProps> = ({
           })}
         </OptionsBox>
       )}
-      {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      {/* <select name={name} value={selectedItem} onChange={onInputChange} /> */}
+      {hasError && <ErrorMessage>{error}</ErrorMessage>}
     </SelectWrapper>
   )
 }
